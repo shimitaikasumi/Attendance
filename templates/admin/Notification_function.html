@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通知機能</title>
+</head>
+<body>
+<h2>通知機能</h2>
+
+    <form method="POST" action="{% url 'create_notification' %}">
+        {% csrf_token %}
+        <label for="recipient_id">従業員ID:</label>
+        <input type="text" id="recipient_id" name="recipient_id" required><br><br>
+
+        <label for="message">メッセージ:</label>
+        <textarea id="message" name="message" required></textarea><br><br>
+
+        <button type="submit">通知を送信</button>
+    </form>
+
+    <a href="{% url 'view_notification' %}">通知一覧を確認</a>
+
+    <!-- 他の管理者用機能へのリンク -->
+</body>
+</html>

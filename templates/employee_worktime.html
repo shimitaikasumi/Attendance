@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>勤務時間の集計</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1, h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        a {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ employeea.lname }} {{ employee.fname }}の勤務時間</h1>
+    
+    <h2>今日の勤務時間</h2>
+    <p>{{ total_hours_today }}</p>
+
+    <h2>今月の勤務時間</h2>
+    <p>{{ total_hours_month }}</p>
+    
+    <a href="">戻る</a>
+</body>
+</html>

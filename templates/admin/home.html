@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理者画面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        div {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>管理者ホーム</h1>
+    
+    <div>
+        <!-- 従業員の登録機能 -->
+        <form method="POST" action="{% url 'registration' %}">
+            {% csrf_token %}
+            <button type="submit">従業員登録</button>
+            <input type="hidden" name="empid" value="{{ employee.empid }}">
+        </form>
+    </div>
+
+    <div>
+        <!-- 勤務時間の集計機能に移動するボタン -->
+        <form method="POST" action="{% url 'admin_worktime_aggregation' %}">
+            {% csrf_token %}
+            <button type="submit">勤務時間の集計確認</button>
+            <input type="hidden" name="empid" value="{{ employee.empid }}">
+        </form>
+    </div>
+
+    <div>
+        <!-- 通知機能に移動するボタン -->
+        <form method="POST" action="{% url 'create_notification' %}">
+            {% csrf_token %}
+            <button type="submit">通知機能</button>
+            <input type="hidden" name="empid" value="{{ employee.empid }}">
+        </form>
+    </div>
+    <!-- 他の管理者用機能 -->
+    <!-- 例えば、従業員の管理やレポート出力など -->
+</body>
+</html>

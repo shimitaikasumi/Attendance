@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>連絡リクエスト管理</title>
+</head>
+<body>
+    <h1>連絡リクエスト管理</h1>
+    <table border="1">
+        <tr>
+            <th>従業員ID</th>
+            <th>リクエストの種類</th>
+            <th>メッセージ</th>
+            <th>ステータス</th>
+            <th>操作</th>
+        </tr>
+        {% for request in contact_request %}
+        <tr>
+            <td>{{ request.employee.empid }}</td>
+            <td>{{ request.request_type }}</td>
+            <td>{{ request.message }}</td>
+            <td>{{ request.status }}</td>
+            <td>
+                <form method="POST" action="{% url 'approve_contact_request' request.id %}">
+                    {% csrf_token %}
+                    <button type="submit">承認</button>
+                </form>
+                <form method="POST" action="{% url 'reject_contact_request' request.id %}">
+                    {% csrf_token %}
+                    <button type="submit">却下</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

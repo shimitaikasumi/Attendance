@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>休暇申請状況</title>
+</head>
+<body>
+    <h1>休暇申請状況</h1>
+    <div id="tableContainer"></div>
+    
+    <table border="1">
+        <tr>
+            <th>申請日</th>
+            <th>開始日</th>
+            <th>終了日</th>
+            <th>理由</th>
+            <th>状態</th>
+        </tr>
+        {% for request in leave_request %}
+            <tr>
+                <td>{{ request.created_at }}</td>  <!-- 作成日があれば -->
+                <td>{{ request.start_date }}</td>
+                <td>{{ request.end_date }}</td>
+                <td>{{ request.reason }}</td>
+                <td>{{ request.get_status_display }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

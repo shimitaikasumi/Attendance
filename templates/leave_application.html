@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>休暇申請</title>
+</head>
+<body>
+    <h1>休暇申請フォーム</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="leave_type">休暇タイプ:</label>
+        <select name="leave_type" id="leave_type">
+            <option value="有給">有給</option>
+            <option value="特別休暇">特別休暇</option>
+        </select><br>
+        
+        <label for="start_date">開始日:</label>
+        <input type="date" name="start_date" id="start_date"><br>
+
+        <label for="end_date">終了日:</label>
+        <input type="date" name="end_date" id="end_date"><br>
+
+        <label for="reason">理由:</label>
+        <textarea name="reason" id="reason"></textarea><br>
+
+        <button type="submit">申請</button>
+        <input type="hidden" name="empid" value="{{ employee.empid }}">
+    </form>
+</body>
+</html>

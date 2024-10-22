@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>連絡リクエスト</title>
+</head>
+<body>
+    <h1>連絡リクエスト</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="request_type">リクエストの種類:</label>
+        <select name="request_type" required>
+            <option value="出勤時間修正">出勤時間修正</option>
+            <option value="退勤時間修正">退勤時間修正</option>
+            <option value="休憩入時間修正">休憩入時間修正</option>
+            <option value="休憩戻時間修正">休憩戻時間修正</option>
+            <option value="その他">その他</option>
+        </select>
+        <br>
+        <label for="message">メッセージ:</label>
+        <textarea name="message" required></textarea>
+        <br>
+        <button type="submit">送信</button>
+    </form>
+</body>
+</html>

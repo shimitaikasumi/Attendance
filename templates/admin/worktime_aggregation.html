@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>勤務時間の集計確認</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin-right: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 200px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            max-width: 600px;
+            border-collapse: collapse;
+            margin-top: 20px;
+            text-align: center;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        #tableContainer {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>勤務時間の集計確認</h1>
+    
+    <form method="POST" action="{% url 'admin_worktime_empsearch' %}">
+        {% csrf_token %}
+        <label for="empid">🔍</label>
+        <input type="text" id="empid" name="empid">
+        <button type="submit">検索</button>
+    </form>
+    
+    {{ message }}<br>
+    
+    <div id="tableContainer"></div>
+    <table border="1">
+        <tr>
+            <th>従業員ID</th>
+            <th>勤務時間（月合計）</th>
+        </tr>
+        {% for e in employee %}
+            <tr>
+                <td>{{ e.empid }}</td>
+                <td>{{ employee_worktime }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

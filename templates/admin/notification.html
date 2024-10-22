@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通知一覧</title>
+</head>
+<body>
+    <h1>通知一覧</h1>
+
+    <table border="1">
+        <tr>
+            <th>送信者</th>
+            <th>メッセージ内容</th>
+            <th>送信日時</th>
+        </tr>
+        {% for no in notification %}
+        <tr>
+            <td>{{ no.sender.fname }} {{ no.sender.lname }}</td>
+            <td>{{ no.message }}</td>
+            <td>{{ no.created_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">通知はありません。</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="">管理者ホームへ戻る</a>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>勤怠入力</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        div {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 300px;
+        }
+        form {
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p, a {
+            text-align: center;
+        }
+        #current-time {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<h2>勤怠入力フォーム</h2>
+{{ message }}<br>
+{{ employee.empid }}:{{ employee.lname }} {{ employee.fname }}
+
+<p id="current-time"></p> <!-- 現在の日時を表示 -->
+
+<div>
+    <form method="POST" action="{% url 'clock_in' %}">
+        {% csrf_token %}
+        <input type="hidden" name="empid" value="{{ employee.empid }}">
+        <button type="submit">出勤</button>
+    </form>
+
+    <form method="POST" action="{% url 'clock_out' %}">
+        {% csrf_token %}
+        <input type="hidden" name="empid" value="{{ employee.empid }}">
+        <button type="submit">退勤</button>
+    </form>
+
+    <form method="POST" action="{% url 'break_in' %}"> <!-- 休憩入 -->
+        {% csrf_token %}
+        <input type="hidden" name="empid" value="{{ employee.empid }}">
+        <button type="submit">休憩入</button>
+    </form>
+
+    <form method="POST" action="{% url 'break_out' %}"> <!-- 休憩戻 -->
+        {% csrf_token %}
+        <input type="hidden" name="empid" value="{{ employee.empid }}">
+        <button type="submit">休憩戻</button>
+    </form>
+</div>
+
+<!-- 勤務時間の集計ボタンを追加 -->
+<form method="GET" action="{% url 'employee_worktime' %}">
+    <button type="submit">勤務時間の集計</button>
+    <input type="hidden" name="empid" value="{{ employee.empid }}">
+</form>
+
+<a href="{% url 'logout' %}">ログアウト</a>
+        
+
+</body>
+</html>
